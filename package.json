@@ -4,7 +4,8 @@
   "description": "<img src=\"./.github/resources/anger.png\" width=\"128px\" height=\"128px\" align=\"left\"/>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
