@@ -4,6 +4,8 @@ const jimp = require('jimp')
 const app = express()
 const port = process.env.PORT || 3000
 
+app.locals.env = process.env
+
 app.use(express.static('public'))
 
 app.set('views', './src/views')
@@ -14,10 +16,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:name/:days/:record', (req, res) => {
+    const {name, days, record} = req.params
+
     res.render('internal', {
-        name: req.params.name,
-        days: req.params.days,
-        record: req.params.record
+        name,
+        days,
+        record
     })
 })
 

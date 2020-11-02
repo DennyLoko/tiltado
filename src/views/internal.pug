@@ -1,5 +1,9 @@
 extends layout.pug
 
+block header
+    meta(property="og:description" content=fullText)
+    meta(property="og:image" content=imgSrc)
+
 block content
     div.container
         div.row
