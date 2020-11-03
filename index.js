@@ -28,16 +28,6 @@ app.get('/:name/:days/:record', (req, res) => {
     })
 })
 
-app.get('/:name/:days/:record', (req, res) => {
-    const {name, days, record} = req.params
-
-    res.render('internal', {
-        name,
-        days,
-        record
-    })
-})
-
 app.get('/i/:name/:days/:record', async (req, res) => {
     renderLastTilt(res, req.params.name, req.params.days, req.params.record);
 })
@@ -81,17 +71,6 @@ app.get('/automated/source/:name/comoEsta', (req, res) => {
         }
     })
     
-})
-
-
-app.get('/source/:name', (req, res) => {
-    const {name, days, record} = req.params
-
-    res.render('internal', {
-        name,
-        days,
-        record
-    })
 })
 
 async function renderLastTilt(res, name, days, record) {
