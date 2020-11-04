@@ -32,11 +32,30 @@ app.get('/i/:name/:days/:record', async (req, res) => {
     renderLastTilt(res, req.params.name, req.params.days, req.params.record);
 })
 
-app.get('/automated/source/:name/tiltou', (req, res) => {
+app.get('/automated/source/:name/aspira', (req, res) => {
     const {name} = req.params
     const lastTilt = new Date().getTime();
+    const record = 0;
     
-    Tiltados.findOne({name}).then(savedTiltado => {
+    new Tiltados({name, lastTilt, record}).save().then(result => {
+        res.send(result.id);
+    }).catch(error => {
+        console.error(error);
+        res.send("Error saving the user")
+    })
+})
+
+app.get('/automated/source/geral/lista', (req, res) => {
+    Tiltados.find().then(result => {
+        res.send(result);
+    })
+})
+
+app.get('/automated/source/:id/tiltou', (req, res) => {
+    const {id} = req.params
+    const lastTilt = new Date().getTime();
+    
+    Tiltados.findById(id).then(savedTiltado => {
         let record = 0;
         if (savedTiltado) {
             const daysDiff = daysDifference(lastTilt, savedTiltado.lastTilt)
@@ -54,11 +73,11 @@ app.get('/automated/source/:name/tiltou', (req, res) => {
     
 })
 
-app.get('/automated/source/:name/comoEsta', (req, res) => {
-    const {name} = req.params
+app.get('/automated/source/:id/comoEsta', (req, res) => {
+    const {id} = req.params
     const lastTilt = new Date().getTime();
     
-    Tiltados.findOne({name}).then(savedTiltado => {
+    Tiltados.findById(id).then(savedTiltado => {
         let record = 0;
         if (savedTiltado) {
             const daysDiff = daysDifference(new Date().getTime(), savedTiltado.lastTilt);
