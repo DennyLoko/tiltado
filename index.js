@@ -56,7 +56,7 @@ app.get('/automated/source/:id/tiltou', (req, res) => {
     const lastTilt = new Date().getTime();
     
     Tiltados.findById(id).then(savedTiltado => {
-        let record = 0;
+        let record = savedTiltado.record ? savedTiltado.record : 0;
         if (savedTiltado) {
             const daysDiff = daysDifference(lastTilt, savedTiltado.lastTilt)
             if (daysDiff > record) {
